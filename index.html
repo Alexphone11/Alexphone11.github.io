@@ -156,6 +156,90 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/17/%E4%BD%9C%E4%B8%9A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="heihei">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="嘿嘿的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/09/17/%E4%BD%9C%E4%B8%9A1/" class="post-title-link" itemprop="url">作业</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-09-17 00:00:00 / 修改时间：19:46:00" itemprop="dateCreated datePublished" datetime="2024-09-17T00:00:00+08:00">2024-09-17</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="作业1-绘制风压高度变化系数图表"><a href="#作业1-绘制风压高度变化系数图表" class="headerlink" title="作业1: 绘制风压高度变化系数图表"></a>作业1: 绘制风压高度变化系数图表</h3><h4 id="1-理解Eurocode-1991-1-4"><a href="#1-理解Eurocode-1991-1-4" class="headerlink" title="1. 理解Eurocode 1991-1-4"></a>1. 理解Eurocode 1991-1-4</h4><p>Eurocode 1991-1-4 是欧洲规范，用于计算风力对建筑物的影响。它提供了风压高度变化系数的计算方法。</p>
+<h4 id="2-推导和计算过程"><a href="#2-推导和计算过程" class="headerlink" title="2. 推导和计算过程"></a>2. 推导和计算过程</h4><p>风压高度变化系数a_z 可以通过以下公式计算：<br>$$<br>alpha_z &#x3D; \frac{v(z)}{v_{ref}}<br>$$</p>
+<p>其中 v(z) 是在高度 ( z ) 处的风速， v_{ref}  是参考高度处的风速。</p>
+<p>根据 Eurocode，风速 ( v(z) ) 可以通过以下公式计算：<br>$$<br>v(z) &#x3D; v_{b} \left(\frac{\ln(z&#x2F;z_0)}{\ln(zh&#x2F;z_0)}\right)^2<br>$$</p>
+<p>其中：</p>
+<ul>
+<li>vb 是基本风速</li>
+<li>z 是高度</li>
+<li>z0 是粗糙度长度</li>
+<li>zh  是参考高度</li>
+</ul>
+<h4 id="3-绘图代码"><a href="#3-绘图代码" class="headerlink" title="3. 绘图代码"></a>3. 绘图代码</h4><p>使用 Python 和 matplotlib 库来绘制图表。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 参数设置</span></span><br><span class="line">v_b = <span class="number">20</span>  <span class="comment"># 基本风速 m/s</span></span><br><span class="line">z0 = <span class="number">0.1</span>  <span class="comment"># 粗糙度长度</span></span><br><span class="line">zh = <span class="number">10</span>   <span class="comment"># 参考高度</span></span><br><span class="line">heights = np.linspace(<span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>)  <span class="comment"># 计算高度</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算风速</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">wind_speed</span>(<span class="params">z</span>):</span><br><span class="line">    <span class="keyword">return</span> v_b * (np.log(z/z0) / np.log(zh/z0))**<span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算风压高度变化系数</span></span><br><span class="line">alpha_z = wind_speed(heights) / v_b</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘图</span></span><br><span class="line">plt.figure(figsize=(<span class="number">10</span>, <span class="number">6</span>))</span><br><span class="line">plt.plot(heights, alpha_z, label=<span class="string">&#x27;Eurocode 1991-1-4&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Height (m)&#x27;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&#x27;Wind Pressure Coefficient&#x27;</span>)</span><br><span class="line">plt.title(<span class="string">&#x27;Wind Pressure Height Variation Coefficient&#x27;</span>)</span><br><span class="line">plt.legend()</span><br><span class="line">plt.grid(<span class="literal">True</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<h3 id="作业2-计算风荷载及基底剪力和底层弯矩"><a href="#作业2-计算风荷载及基底剪力和底层弯矩" class="headerlink" title="作业2: 计算风荷载及基底剪力和底层弯矩"></a>作业2: 计算风荷载及基底剪力和底层弯矩</h3><h4 id="1-理解问题"><a href="#1-理解问题" class="headerlink" title="1. 理解问题"></a>1. 理解问题</h4><p>需要计算一栋20层高的建筑物在给定风速下的风荷载、基底剪力和底层弯矩。</p>
+<h4 id="2-计算风荷载"><a href="#2-计算风荷载" class="headerlink" title="2. 计算风荷载"></a>2. 计算风荷载</h4><p>风荷载 ( q ) 可以通过以下公式计算：<br>$$<br>q &#x3D; \frac{1}{2} \rho v(z)^2 C_d<br>$$</p>
+<p>其中：</p>
+<ul>
+<li>rho  是空气密度（约为 1.225 kg&#x2F;m³）</li>
+<li>v(z) 是高度 ( z ) 处的风速</li>
+<li>C_d 是阻力系数</li>
+</ul>
+<h4 id="3-计算基底剪力和底层弯矩"><a href="#3-计算基底剪力和底层弯矩" class="headerlink" title="3. 计算基底剪力和底层弯矩"></a>3. 计算基底剪力和底层弯矩</h4><p>基底剪力 ( V ) 和底层弯矩 ( M ) 可以通过积分风荷载 ( q ) 来计算。</p>
+<h4 id="4-绘图代码"><a href="#4-绘图代码" class="headerlink" title="4. 绘图代码"></a>4. 绘图代码</h4><p>这里需要具体的建筑物参数和风荷载分布，因此提供一个基本的框架。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 假设参数</span></span><br><span class="line">rho = <span class="number">1.225</span>  <span class="comment"># 空气密度 kg/m³</span></span><br><span class="line">C_d = <span class="number">1.2</span>    <span class="comment"># 阻力系数</span></span><br><span class="line">heights = np.linspace(<span class="number">0</span>, <span class="number">80</span>, <span class="number">20</span>)  <span class="comment"># 建筑物高度</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算风荷载</span></span><br><span class="line">q = <span class="number">0.5</span> * rho * (wind_speed(heights)**<span class="number">2</span>) * C_d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算基底剪力和底层弯矩</span></span><br><span class="line">V = np.trapz(q, heights)</span><br><span class="line">M = np.trapz(heights * q, heights)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;基底剪力: <span class="subst">&#123;V&#125;</span> N&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;底层弯矩: <span class="subst">&#123;M&#125;</span> Nm&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/10/zh_cn/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -181,7 +265,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-09-10 00:00:00 / 修改时间：16:17:29" itemprop="dateCreated datePublished" datetime="2024-09-10T00:00:00+08:00">2024-09-10</time>
+              <time title="创建时间：2024-09-10 00:00:00 / 修改时间：20:21:34" itemprop="dateCreated datePublished" datetime="2024-09-10T00:00:00+08:00">2024-09-10</time>
             </span>
 
           
@@ -568,7 +652,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
